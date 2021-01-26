@@ -10,7 +10,7 @@ keywords = ['IPv6','2001']
 
 curTime=time.strftime("%Y-%M-%D",time.localtime())#记录当前时间
 execF=False
-cycleTime = 30  # update period.(in second)
+cycleTime = 10  # update period.(in second)
 
 def getIPv6Address():
     global MyIpv6
@@ -51,8 +51,8 @@ def timerTask():
 #     if desTime > curTime:
 #       execF = False#任务执行执行置值为
 #       curTime=desTime
-  timer = threading.Timer(cycleTime,timerTask)
-  timer.start()
+  # timer = threading.Timer(cycleTime,timerTask)
+  # timer.start()
 
 if __name__ == "__main__":
   timer = threading.Timer(cycleTime,timerTask)
