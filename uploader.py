@@ -10,7 +10,7 @@ keywords = ['IPv6','2001']
 
 curTime=time.strftime("%Y-%M-%D",time.localtime())#记录当前时间
 execF=False
-cycleTime = 60  # update period.(in second)
+cycleTime = 30  # update period.(in second)
 
 def getIPv6Address():
     global MyIpv6
@@ -19,6 +19,8 @@ def getIPv6Address():
     for line in lines:
         if keywords[0] in line and keywords[1] in line:
             MyIpv6 = line.split('. :')[1]
+            break
+    print(MyIpv6)
 
 
 def writeAndUpload():
