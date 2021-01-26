@@ -1,6 +1,7 @@
 # 需要设置免密， 将public key添加到github上
 
 import os
+import git
 from git import Repo
 import threading,time
 
@@ -29,12 +30,16 @@ def writeAndUpload():
 
     dirfile = os.path.abspath(git_dir) # 
     repo = Repo(dirfile)
-    
-    g = repo.git
-    g.add("--all")
-    g.commit("-m auto update")
-    g.push()
-    print("Successful push!")
+    try:
+      g = repo.git
+      g.add("--all")
+      g.commit("-m auto update")
+      g.push()
+      print("Successful push!")
+
+    except git.GitCommandError as exc:
+      print(exc.stderr)
+            
 
 def Update():
     getIPv6Address()
