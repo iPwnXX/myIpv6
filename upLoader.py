@@ -3,11 +3,12 @@
 import os
 import git
 from git import Repo
-import threading,time
-
+import threading
+import time
+import subprocess
 
 class upLoader:
-    def __init__(self, cycle_time=60, verbose=False):
+    def __init__(self, cycle_time=60, verbose=False, gui_enable=False):
         self.git_dir = './'  # 文件位置。
         self.MyIpv6 = ''
         self.keywords = ['IPv6', '2001']
@@ -17,6 +18,7 @@ class upLoader:
         self.last_time_checked = '- - - -'
         self.last_time_upload = '- - - -'
         self.infoFuncs = None
+        self.GUIEnable = gui_enable
         self.initial_start()
 
     def set_check_period(self, period):
@@ -28,7 +30,17 @@ class upLoader:
         self.infoFuncs = funcs
 
     def get_ipv6_address(self):
-        text = os.popen('ipconfig').read()
+        text=''
+        try:
+            # with os.popen('ipconfig', "r") as p:
+            #     text = p.read()
+            p = subprocess.Popen('cmd /u /c dir', stdout=subprocess.PIPE)
+            result = p.communicate()
+            text = result[0].decode('u16')
+
+        except UnicodeDecodeError:
+            if self.verbose:
+                print('read instruction:', text)
         lines = text.split('\n')
         for line in lines:
             if self.keywords[0] in line and self.keywords[1] in line:
@@ -83,12 +95,15 @@ class upLoader:
             self.lastIpv6 = f.read()
             if self.verbose:
                 print('saved ipv6:', self.lastIpv6)
+
         self.timer_task(init=True)
 
     def timer_task(self, init=False):
         if not init:
             self.check_update()
         timer = threading.Timer(self.cycleTime, self.timer_task)
+        if self.GUIEnable:
+            timer.setDaemon(True)  # close child thread if main thread is closed.
         timer.start()
 
 

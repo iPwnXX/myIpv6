@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from myIpv6.upLoader import upLoader
+from upLoader import upLoader
 
 import example_ui as ui
 
@@ -23,9 +23,9 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.label_ipv6.setText(UpLoader.MyIpv6)
         self.textEdit_period.setText(str(UpLoader.cycleTime))
         self.label_last_update.setText(UpLoader.last_time_upload)
+        self.label_last_check.setText(UpLoader.last_time_checked)
 
     def period_changed(self, text):
-        print('text change:', text)
         UpLoader.set_check_period(int(text))
 
     def last_checked_update(self):
@@ -38,7 +38,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
 if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    UpLoader = upLoader(cycle_time=10, verbose=True)
+    UpLoader = upLoader(cycle_time=10, verbose=True,gui_enable=True)
     window = Main()
     window.show()
     sys.exit(app.exec_())
