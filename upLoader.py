@@ -30,10 +30,10 @@ class upLoader:
         self.infoFuncs = funcs
 
     def get_ipv6_address(self):
-        text=''
+        text = ''
         try:
-        #     with os.popen('ipconfig', "r") as p:
-        #         text = p.read()
+            #     with os.popen('ipconfig', "r") as p:
+            #         text = p.read()
 
             import urllib.request
             import subprocess
@@ -48,8 +48,7 @@ class upLoader:
             # address = m[1][0]
             # print(address)
 
-            text = out[0].decode('utf-8')
-            # print('text:', text)
+            text = out[0].decode('gbk')
 
         except UnicodeDecodeError:
             if self.verbose:
