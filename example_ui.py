@@ -14,15 +14,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(403, 187)
+        MainWindow.resize(434, 240)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget.setGeometry(QtCore.QRect(10, 0, 401, 281))
         self.listWidget.setObjectName("listWidget")
-        self.textEdit_period = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit_period.setGeometry(QtCore.QRect(120, 90, 131, 31))
-        self.textEdit_period.setObjectName("textEdit_period")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(40, 20, 61, 21))
         self.label.setObjectName("label")
@@ -38,9 +35,18 @@ class Ui_MainWindow(object):
         self.label_last_update = QtWidgets.QLabel(self.centralwidget)
         self.label_last_update.setGeometry(QtCore.QRect(120, 60, 221, 21))
         self.label_last_update.setObjectName("label_last_update")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(30, 150, 71, 16))
+        self.label_4.setObjectName("label_4")
+        self.label_last_check = QtWidgets.QLabel(self.centralwidget)
+        self.label_last_check.setGeometry(QtCore.QRect(120, 150, 181, 21))
+        self.label_last_check.setObjectName("label_last_check")
+        self.textEdit_period = QtWidgets.QLineEdit(self.centralwidget)
+        self.textEdit_period.setGeometry(QtCore.QRect(120, 100, 113, 20))
+        self.textEdit_period.setObjectName("textEdit_period")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 403, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 434, 23))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -53,16 +59,14 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.textEdit_period.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">5</p></body></html>"))
         self.label.setText(_translate("MainWindow", "My IPV6:"))
         self.label_2.setText(_translate("MainWindow", "Last upload:"))
         self.label_3.setText(_translate("MainWindow", "Check Period:"))
         self.label_ipv6.setText(_translate("MainWindow", "2001:da8:201d:1101:9382:454f:3e18:d131"))
         self.label_last_update.setText(_translate("MainWindow", "2020"))
+        self.label_4.setText(_translate("MainWindow", "last check:"))
+        self.label_last_check.setText(_translate("MainWindow", "2020"))
+        self.textEdit_period.setText(_translate("MainWindow", "5"))
 
 
 if __name__ == "__main__":

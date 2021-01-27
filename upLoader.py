@@ -3,7 +3,7 @@
 import os
 import git
 from git import Repo
-import threading
+import threading,time
 
 
 class upLoader:
@@ -14,24 +14,39 @@ class upLoader:
         self.cycleTime = cycle_time  # update period.(in second)
         self.verbose = verbose  # print debug information
         self.lastIpv6 = ''
+        self.last_time_upload = '- - - -'
+        self.last_time_checked = '- - - -'
+        self.infoFuncs = None
         self.initial_start()
+
+    def set_check_period(self, period):
+        self.cycleTime = period
+        if self.verbose:
+            print('check period changes to %i' % self.cycleTime)
+
+    def set_info_funcs(self, funcs):
+        self.infoFuncs = funcs
 
     def get_ipv6_address(self):
         text = os.popen('ipconfig').read()
         lines = text.split('\n')
         for line in lines:
             if self.keywords[0] in line and self.keywords[1] in line:
-                self.MyIpv6 = line.split('. :')[1]
+                self.MyIpv6 = line[line.find('2001'):]
                 break
         if self.verbose:
-            print('current IPV6:', self.MyIpv6)
+            print('current IPV6:\n', self.MyIpv6)
+        self.last_time_checked = time.strftime("%Y-%m-%d %H:%M:%S",
+                                               time.localtime())
+        if self.infoFuncs is not None:
+            self.infoFuncs[0]()
 
     def write_and_upload(self):
-        if self.verbose:
-            print('try git push...')
         with open(self.git_dir + 'ipv6.txt', 'w') as f:
             f.write(self.MyIpv6)
 
+        if self.verbose:
+            print('try git push...')
         dir_file = os.path.abspath(self.git_dir)  #
         repo = Repo(dir_file)
         try:
@@ -45,12 +60,19 @@ class upLoader:
         except git.GitCommandError as exc:
             if self.verbose:
                 print(exc.stderr)
+        if self.infoFuncs is not None:
+            self.infoFuncs[1]()
 
     def check_update(self):
         self.get_ipv6_address()
-        if self.MyIpv6 is not self.lastIpv6:
+        if self.MyIpv6 != self.lastIpv6:
+            if self.verbose:
+                print('different from last ipv6:\n', self.lastIpv6)
             self.write_and_upload()
             self.lastIpv6 = self.MyIpv6
+            self.last_time_upload = time.strftime("%Y-%m-%d %H:%M:%S",
+                                                  time.localtime())
+
         else:
             if self.verbose:
                 print('ipv6 no update')
@@ -63,21 +85,13 @@ class upLoader:
         self.timer_task()
 
     def timer_task(self):
-        #   if execF is False:
-        self.check_update()  # 判断任务是否执行过，没有执行就执行
-
-    #     execF=True
-    #   else:#任务执行过，判断时间是否新的一天。如果是就执行任务
-    #     desTime=time.strftime("%Y-%M-%D",time.localtime())
-    #     if desTime > curTime:
-    #       execF = False#任务执行执行置值为
-    #       curTime=desTime
+        self.check_update()
         timer = threading.Timer(self.cycleTime, self.timer_task)
         timer.start()
 
 
 if __name__ == "__main__":
-    UpLoader = upLoader(cycle_time=20, verbose=True)
+    UpLoader = upLoader(cycle_time=5, verbose=True)
 
     # break
 
