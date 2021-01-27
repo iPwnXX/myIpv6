@@ -14,8 +14,8 @@ class upLoader:
         self.cycleTime = cycle_time  # update period.(in second)
         self.verbose = verbose  # print debug information
         self.lastIpv6 = ''
-        self.last_time_upload = '- - - -'
         self.last_time_checked = '- - - -'
+        self.last_time_upload = '- - - -'
         self.infoFuncs = None
         self.initial_start()
 
@@ -57,6 +57,8 @@ class upLoader:
             if self.verbose:
                 print("Successful push!")
             self.lastIpv6 = self.MyIpv6
+            self.last_time_upload = time.strftime("%Y-%m-%d %H:%M:%S",
+                                                  time.localtime())
 
         except git.GitCommandError as exc:
             if self.verbose:
@@ -71,8 +73,6 @@ class upLoader:
             if self.verbose:
                 print('different from last ipv6:\n', self.lastIpv6)
             self.write_and_upload()
-            self.last_time_upload = time.strftime("%Y-%m-%d %H:%M:%S",
-                                                  time.localtime())
 
         else:
             if self.verbose:
