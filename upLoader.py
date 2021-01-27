@@ -56,6 +56,7 @@ class upLoader:
             g.push()
             if self.verbose:
                 print("Successful push!")
+            self.lastIpv6 = self.MyIpv6
 
         except git.GitCommandError as exc:
             if self.verbose:
@@ -63,8 +64,6 @@ class upLoader:
 
         if self.infoFuncs is not None:
             self.infoFuncs[1]()
-            if self.verbose:
-                print('update last upload text')
 
     def check_update(self):
         self.get_ipv6_address()
@@ -72,7 +71,6 @@ class upLoader:
             if self.verbose:
                 print('different from last ipv6:\n', self.lastIpv6)
             self.write_and_upload()
-            self.lastIpv6 = self.MyIpv6
             self.last_time_upload = time.strftime("%Y-%m-%d %H:%M:%S",
                                                   time.localtime())
 
