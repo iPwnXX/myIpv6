@@ -1,3 +1,5 @@
+# recompile to exe: pyinstaller -F -w -i pic/code.ico example_main.py
+
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
