@@ -60,8 +60,11 @@ class upLoader:
         except git.GitCommandError as exc:
             if self.verbose:
                 print(exc.stderr)
+
         if self.infoFuncs is not None:
             self.infoFuncs[1]()
+            if self.verbose:
+                print('update last upload text')
 
     def check_update(self):
         self.get_ipv6_address()
