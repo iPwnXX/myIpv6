@@ -40,7 +40,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
 if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    UpLoader = upLoader(cycle_time=5, verbose=True, gui_enable=True)
+    UpLoader = upLoader(cycle_time=10, verbose=True, gui_enable=True)
     window = Main()
     window.show()
     sys.exit(app.exec_())

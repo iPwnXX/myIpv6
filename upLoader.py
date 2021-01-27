@@ -96,6 +96,7 @@ class upLoader:
         if self.MyIpv6 != self.lastIpv6:
             if self.verbose:
                 print('different from last ipv6:\n', self.lastIpv6)
+                print(len(self.MyIpv6),len(self.lastIpv6))
             self.write_and_upload()
 
         else:
