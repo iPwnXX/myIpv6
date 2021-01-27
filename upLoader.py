@@ -30,17 +30,30 @@ class upLoader:
         self.infoFuncs = funcs
 
     def get_ipv6_address(self):
-        text=''
+        # text=''
         try:
-            # with os.popen('ipconfig', "r") as p:
-            #     text = p.read()
-            p = subprocess.Popen('cmd /u /c dir', stdout=subprocess.PIPE)
-            result = p.communicate()
-            text = result[0].decode('u16')
+            with os.popen('ipconfig', "r") as p:
+                text = p.read()
+
+            # import urllib.request
+            # import subprocess
+            # import socket
+            # import re
+
+            # child = subprocess.Popen("ipconfig", shell=True, stdout=subprocess.PIPE)
+            # out = child.communicate()  # 保存ipconfig中的所有信息
+
+            # ipv6_pattern = '(([a-f0-9]{1,4}:){7}[a-f0-9]{1,4})'
+            # m = re.findall(ipv6_pattern, str(out));
+            # address = m[1][0]
+            # print(address)
+
+            # text = out.decode('utf-8')
+            # print('text:', text)
 
         except UnicodeDecodeError:
             if self.verbose:
-                print('read instruction:', text)
+                print('error read instruction:', text)
         lines = text.split('\n')
         for line in lines:
             if self.keywords[0] in line and self.keywords[1] in line:
