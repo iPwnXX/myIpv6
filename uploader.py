@@ -14,7 +14,7 @@ class upLoader:
         self.cycleTime = cycle_time  # update period.(in second)
         self.verbose = verbose  # print debug information
         self.lastIpv6 = ''
-        self.timer_task()
+        self.initial_start()
 
     def get_ipv6_address(self):
         text = os.popen('ipconfig').read()
@@ -24,9 +24,11 @@ class upLoader:
                 self.MyIpv6 = line.split('. :')[1]
                 break
         if self.verbose:
-            print(self.MyIpv6)
+            print('current IPV6:', self.MyIpv6)
 
     def write_and_upload(self):
+        if self.verbose:
+            print('try git push...')
         with open(self.git_dir + 'ipv6.txt', 'w') as f:
             f.write(self.MyIpv6)
 
@@ -52,6 +54,13 @@ class upLoader:
         else:
             if self.verbose:
                 print('ipv6 no update')
+
+    def initial_start(self):
+        with open(self.git_dir + 'ipv6.txt', 'r') as f:
+            self.lastIpv6 = f.read()
+            if self.verbose:
+                print('saved ipv6:', self.lastIpv6)
+        self.timer_task()
 
     def timer_task(self):
         #   if execF is False:
