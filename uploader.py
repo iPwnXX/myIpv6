@@ -3,64 +3,72 @@
 import os
 import git
 from git import Repo
-import threading,time
-
-git_dir = './' # 文件位置。
-MyIpv6 = ''
-keywords = ['IPv6','2001']
-
-curTime=time.strftime("%Y-%M-%D",time.localtime())#记录当前时间
-execF=False
-cycleTime = 10  # update period.(in second)
-
-def getIPv6Address():
-    global MyIpv6
-    text = os.popen('ipconfig').read()
-    lines = text.split('\n')
-    for line in lines:
-        if keywords[0] in line and keywords[1] in line:
-            MyIpv6 = line.split('. :')[1]
-            break
-    print(MyIpv6)
+import threading
 
 
-def writeAndUpload():
-    with open(git_dir+'ipv6.txt', 'w') as f:
-        f.write(MyIpv6)
+class upLoader:
+    def __init__(self, cycle_time=60, verbose=False):
+        self.git_dir = './'  # 文件位置。
+        self.MyIpv6 = ''
+        self.keywords = ['IPv6', '2001']
+        self.cycleTime = cycle_time  # update period.(in second)
+        self.verbose = verbose  # print debug information
+        self.lastIpv6 = ''
+        self.timer_task()
 
-    dirfile = os.path.abspath(git_dir) # 
-    repo = Repo(dirfile)
-    try:
-      g = repo.git
-      g.add("--all")
-      g.commit("-m auto update")
-      g.push()
-      print("Successful push!")
+    def get_ipv6_address(self):
+        text = os.popen('ipconfig').read()
+        lines = text.split('\n')
+        for line in lines:
+            if self.keywords[0] in line and self.keywords[1] in line:
+                self.MyIpv6 = line.split('. :')[1]
+                break
+        if self.verbose:
+            print(self.MyIpv6)
 
-    except git.GitCommandError as exc:
-      print(exc.stderr)
-            
+    def write_and_upload(self):
+        with open(self.git_dir + 'ipv6.txt', 'w') as f:
+            f.write(self.MyIpv6)
 
-def Update():
-    getIPv6Address()
-    writeAndUpload()
+        dir_file = os.path.abspath(self.git_dir)  #
+        repo = Repo(dir_file)
+        try:
+            g = repo.git
+            g.add("--all")
+            g.commit("-m auto update")
+            g.push()
+            if self.verbose:
+                print("Successful push!")
 
-def timerTask():
-  global execF
-  global curTime
-#   if execF is False:
-  Update()#判断任务是否执行过，没有执行就执行
-#     execF=True
-#   else:#任务执行过，判断时间是否新的一天。如果是就执行任务
-#     desTime=time.strftime("%Y-%M-%D",time.localtime())
-#     if desTime > curTime:
-#       execF = False#任务执行执行置值为
-#       curTime=desTime
-  # timer = threading.Timer(cycleTime,timerTask)
-  # timer.start()
+        except git.GitCommandError as exc:
+            if self.verbose:
+                print(exc.stderr)
+
+    def check_update(self):
+        self.get_ipv6_address()
+        if self.MyIpv6 is not self.lastIpv6:
+            self.write_and_upload()
+            self.lastIpv6 = self.MyIpv6
+        else:
+            if self.verbose:
+                print('ipv6 no update')
+
+    def timer_task(self):
+        #   if execF is False:
+        self.check_update()  # 判断任务是否执行过，没有执行就执行
+
+    #     execF=True
+    #   else:#任务执行过，判断时间是否新的一天。如果是就执行任务
+    #     desTime=time.strftime("%Y-%M-%D",time.localtime())
+    #     if desTime > curTime:
+    #       execF = False#任务执行执行置值为
+    #       curTime=desTime
+        timer = threading.Timer(self.cycleTime, self.timer_task)
+        timer.start()
+
 
 if __name__ == "__main__":
-  timer = threading.Timer(cycleTime,timerTask)
-  timer.start()
-            # break 
-    
+    UpLoader = upLoader(cycle_time=20, verbose=True)
+
+    # break
+
