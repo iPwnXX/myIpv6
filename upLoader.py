@@ -82,10 +82,11 @@ class upLoader:
             self.lastIpv6 = f.read()
             if self.verbose:
                 print('saved ipv6:', self.lastIpv6)
-        self.timer_task()
+        self.timer_task(init=True)
 
-    def timer_task(self):
-        self.check_update()
+    def timer_task(self, init=False):
+        if not init:
+            self.check_update()
         timer = threading.Timer(self.cycleTime, self.timer_task)
         timer.start()
 
