@@ -86,7 +86,7 @@ class upLoader:
 
         except git.GitCommandError as exc:
             if self.verbose:
-                print(exc.stderr)
+                print('git error:\n%s' % exc.stderr)
 
         if self.infoFuncs is not None:
             self.infoFuncs[1]()
