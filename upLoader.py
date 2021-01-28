@@ -56,7 +56,7 @@ class upLoader:
         lines = text.split('\n')
         for line in lines:
             if self.keywords[0] in line and self.keywords[1] in line:
-                self.MyIpv6 = line[line.find('2001'):]
+                self.MyIpv6 = line[line.find('2001'):].split()[0]
                 break
         if self.verbose:
             print('current IPV6:\n', self.MyIpv6)
@@ -96,7 +96,7 @@ class upLoader:
         if self.MyIpv6 != self.lastIpv6:
             if self.verbose:
                 print('different from last ipv6:\n', self.lastIpv6)
-                print(len(self.MyIpv6),len(self.lastIpv6))
+                # cmp_str(self.MyIpv6, self.lastIpv6)
             self.write_and_upload()
 
         else:
@@ -118,6 +118,12 @@ class upLoader:
         if self.GUIEnable:
             timer.setDaemon(True)  # close child thread if main thread is closed.
         timer.start()
+
+
+def cmp_str(str1, str2):
+    for i in range(len(str1)):
+        if str1[i] != str2[i]:
+            print('diff:%s, %s, %i' % (str1[i],str2[i], i))
 
 
 if __name__ == "__main__":
