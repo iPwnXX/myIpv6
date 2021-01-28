@@ -1,6 +1,6 @@
 ('D:\\codes\\python '
  'prj\\ipUploader\\myIpv6\\build\\example_main\\example_main.exe',
- False,
+ True,
  False,
  True,
  'pic\\code.ico',
@@ -39,7 +39,7 @@
  [],
  False,
  False,
- 1611819866,
- [('runw.exe',
-   'd:\\programdata\\anaconda3\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\runw.exe',
+ 1611820225,
+ [('run.exe',
+   'd:\\programdata\\anaconda3\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\run.exe',
    'EXECUTABLE')])
