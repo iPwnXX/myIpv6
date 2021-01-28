@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['example_main.py'],
+a = Analysis(['src_code\\startUpLoader.py'],
              pathex=['D:\\codes\\python prj\\ipUploader\\myIpv6'],
              binaries=[],
              datas=[],
@@ -21,7 +21,7 @@ exe = EXE(pyz,
           a.scripts,
           [],
           exclude_binaries=True,
-          name='example_main',
+          name='startUpLoader',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
@@ -34,4 +34,4 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                upx_exclude=[],
-               name='example_main')
+               name='startUpLoader')

@@ -30,7 +30,7 @@
    'd:\\programdata\\anaconda3\\lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pyqt5.py',
    'PYSOURCE'),
   ('example_main',
-   'D:\\codes\\python prj\\ipUploader\\myIpv6\\example_main.py',
+   'D:\\codes\\python prj\\ipUploader\\myIpv6\\src_code\\example_main.py',
    'PYSOURCE'),
   ('example_main.exe.manifest',
    'D:\\codes\\python '
@@ -39,7 +39,7 @@
  [],
  False,
  False,
- 1611821526,
+ 1611822138,
  [('runw.exe',
    'd:\\programdata\\anaconda3\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\runw.exe',
    'EXECUTABLE')])
