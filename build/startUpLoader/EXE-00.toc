@@ -40,7 +40,7 @@
  [],
  False,
  False,
- 1611822277,
+ 1611823728,
  [('runw.exe',
    'd:\\programdata\\anaconda3\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\runw.exe',
    'EXECUTABLE')])

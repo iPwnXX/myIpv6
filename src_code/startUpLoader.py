@@ -1,4 +1,5 @@
-# recompile to exe: pyinstaller -F -w -i pic/code.ico example_main.py
+# recompile to exe: pyinstaller -w -i pic/code.ico ./src_code/startUpLoader.py
+# -w: no console shown.  -F: compress to single exe file. May fail.
 
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *

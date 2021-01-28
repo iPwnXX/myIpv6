@@ -41,21 +41,22 @@ class upLoader:
             out = child.communicate()  # 保存ipconfig中的所有信息
 
             text = out[0].decode('gbk')
+            lines = text.split('\n')
+            for line in lines:
+                if self.keywords[0] in line and self.keywords[1] in line:
+                    self.MyIpv6 = line[line.find('2001'):].split()[0]
+                    break
+            if self.verbose:
+                print('current IPV6:\n', self.MyIpv6)
+            self.last_time_checked = time.strftime("%Y-%m-%d %H:%M:%S",
+                                                   time.localtime())
+            if self.infoFuncs is not None:
+                self.infoFuncs[0]()
 
         except UnicodeDecodeError:
             if self.verbose:
                 print('error read instruction:', text)
-        lines = text.split('\n')
-        for line in lines:
-            if self.keywords[0] in line and self.keywords[1] in line:
-                self.MyIpv6 = line[line.find('2001'):].split()[0]
-                break
-        if self.verbose:
-            print('current IPV6:\n', self.MyIpv6)
-        self.last_time_checked = time.strftime("%Y-%m-%d %H:%M:%S",
-                                               time.localtime())
-        if self.infoFuncs is not None:
-            self.infoFuncs[0]()
+
 
     def write_and_upload(self):
         with open(self.git_dir + 'ipv6.txt', 'w') as f:
@@ -85,7 +86,7 @@ class upLoader:
 
     def check_update(self):
         self.get_ipv6_address()
-        if self.MyIpv6 != self.lastIpv6:
+        if self.MyIpv6 != '' and self.MyIpv6 != self.lastIpv6:
             if self.verbose:
                 print('different from last ipv6:\n', self.lastIpv6)
                 # cmp_str(self.MyIpv6, self.lastIpv6)
@@ -120,8 +121,7 @@ class upLoader:
 #             print('diff:%s, %s, %i' % (str1[i], str2[i], i))
 
 
-# if __name__ == "__main__":
-#     UpLoader = upLoader(cycle_time=5, verbose=False)
+if __name__ == "__main__":
+    UpLoader = upLoader(cycle_time=5, verbose=True)
 
-    # break
 
