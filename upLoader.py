@@ -114,10 +114,10 @@ class upLoader:
         timer.start()
 
 # debug
-def cmp_str(str1, str2):
-    for i in range(len(str1)):
-        if str1[i] != str2[i]:
-            print('diff:%s, %s, %i' % (str1[i], str2[i], i))
+# def cmp_str(str1, str2):
+#     for i in range(len(str1)):
+#         if str1[i] != str2[i]:
+#             print('diff:%s, %s, %i' % (str1[i], str2[i], i))
 
 
 # if __name__ == "__main__":

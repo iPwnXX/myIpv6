@@ -83,27 +83,6 @@ class upLoader:
     #     if self.infoFuncs is not None:
     #         self.infoFuncs[1]()
 
-    def check_update(self):
-        # self.get_ipv6_address()
-        if self.MyIpv6 != self.lastIpv6:
-            if self.verbose:
-                print('different from last ipv6:\n', self.lastIpv6)
-                # cmp_str(self.MyIpv6, self.lastIpv6)
-            # self.write_and_upload()
-
-        else:
-            if self.verbose:
-                print('ipv6 no update')
-
-    def initial_start(self):
-        root_text = self.git_dir + 'ipv6.txt'
-        if os.path.isfile(root_text):
-            with open(root_text, 'r') as f:
-                self.lastIpv6 = f.read()
-                if self.verbose:
-                    print('saved ipv6:', self.lastIpv6)
-
-        self.timer_task(init=True)
 
     # def timer_task(self, init=False):
     #     if not init:
