@@ -5,11 +5,11 @@ import git
 from git import Repo
 import threading
 import time
-import subprocess
+
 
 class upLoader:
     def __init__(self, cycle_time=60, verbose=False, gui_enable=False):
-        self.git_dir = './'  # 文件位置。
+        self.git_dir = '../../'  # 文件位置。
         self.MyIpv6 = ''
         self.keywords = ['IPv6', '2001']
         self.cycleTime = cycle_time  # update period.(in second)
@@ -35,18 +35,10 @@ class upLoader:
             #     with os.popen('ipconfig', "r") as p:
             #         text = p.read()
 
-            import urllib.request
             import subprocess
-            import socket
-            import re
 
             child = subprocess.Popen("ipconfig", shell=True, stdout=subprocess.PIPE)
             out = child.communicate()  # 保存ipconfig中的所有信息
-
-            # ipv6_pattern = '(([a-f0-9]{1,4}:){7}[a-f0-9]{1,4})'
-            # m = re.findall(ipv6_pattern, str(out));
-            # address = m[1][0]
-            # print(address)
 
             text = out[0].decode('gbk')
 
@@ -104,10 +96,12 @@ class upLoader:
                 print('ipv6 no update')
 
     def initial_start(self):
-        with open(self.git_dir + 'ipv6.txt', 'r') as f:
-            self.lastIpv6 = f.read()
-            if self.verbose:
-                print('saved ipv6:', self.lastIpv6)
+        root_text = self.git_dir + 'ipv6.txt'
+        if os.path.isfile(root_text):
+            with open(root_text, 'r') as f:
+                self.lastIpv6 = f.read()
+                if self.verbose:
+                    print('saved ipv6:', self.lastIpv6)
 
         self.timer_task(init=True)
 
@@ -119,15 +113,15 @@ class upLoader:
             timer.setDaemon(True)  # close child thread if main thread is closed.
         timer.start()
 
-
+# debug
 def cmp_str(str1, str2):
     for i in range(len(str1)):
         if str1[i] != str2[i]:
-            print('diff:%s, %s, %i' % (str1[i],str2[i], i))
+            print('diff:%s, %s, %i' % (str1[i], str2[i], i))
 
 
-if __name__ == "__main__":
-    UpLoader = upLoader(cycle_time=5, verbose=True)
+# if __name__ == "__main__":
+#     UpLoader = upLoader(cycle_time=5, verbose=False)
 
     # break
 

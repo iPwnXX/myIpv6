@@ -28,7 +28,14 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.label_last_check.setText(UpLoader.last_time_checked)
 
     def period_changed(self, text):
-        UpLoader.set_check_period(int(text))
+        if text != '':
+            try:
+                text_int = int(text)
+                if 5 <= text_int <= 60*60:
+                    UpLoader.set_check_period(text_int)
+
+            except ValueError:
+                pass
 
     def last_checked_update(self):
         self.label_last_check.setText(UpLoader.last_time_checked)
