@@ -38,6 +38,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
                 pass
 
     def last_checked_update(self):
+        self.label_ipv6.setText(UpLoader.MyIpv6)
         self.label_last_check.setText(UpLoader.last_time_checked)
 
     def last_upload_update(self):
@@ -47,7 +48,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
 if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    UpLoader = upLoader(cycle_time=10, verbose=True, gui_enable=True)
+    UpLoader = upLoader(cycle_time=5, verbose=True, gui_enable=True)
     window = Main()
     window.show()
     sys.exit(app.exec_())
