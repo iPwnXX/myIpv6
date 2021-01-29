@@ -46,63 +46,57 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.label_last_update.setText(UpLoader.last_time_upload)
 
 
+def get_git_repos_relative_dir():
+    import os
+    split_path = os.getcwd().split('\\')
+    git_dir_upper_level = len(split_path) - (split_path.index('myIpv6')+1)
+    git_dir = ''
+    for i in range(git_dir_upper_level):
+        git_dir += '../'
+
+    return git_dir
+
+
 if __name__ == '__main__':
-    git_dir = '../../'
+    git_dir = get_git_repos_relative_dir()
     import sys
     app = QtWidgets.QApplication(sys.argv)
     app.setQuitOnLastWindowClosed(False)
     UpLoader = upLoader(git_dir=git_dir, cycle_time=5, verbose=True, gui_enable=True)
     window = Main()
     window.show()
+
     # -------------------- 托盘开始 ----------
     # 在系统托盘处显示图标
     w = window
     tp = QSystemTrayIcon(w)
     tp.setIcon(QIcon(git_dir+'pic/favicon-96x96.png'))
     # 设置系统托盘图标的菜单
-    a1 = QAction('&显示(Show)', triggered=w.show)
+    a1 = QAction('&Show', triggered=w.show)
 
 
     def quitApp():
         w.show()  # w.hide() #隐藏
-        re = QMessageBox.question(w, "提示", "退出系统", QMessageBox.Yes |
+        re = QMessageBox.question(w, "prompt", "Exit Program ?", QMessageBox.Yes |
                                   QMessageBox.No, QMessageBox.No)
         if re == QMessageBox.Yes:
             # 关闭窗体程序
             QCoreApplication.instance().quit()
-            # 在应用程序全部关闭后，TrayIcon其实还不会自动消失，
-            # 直到你的鼠标移动到上面去后，才会消失，
-            # 这是个问题，（如同你terminate一些带TrayIcon的应用程序时出现的状况），
-            # 这种问题的解决我是通过在程序退出前将其setVisible(False)来完成的。
             tp.setVisible(False)
 
 
-    a2 = QAction('&退出(Exit)', triggered=quitApp)  # 直接退出可以用qApp.quit
+    a2 = QAction('&(Exit)', triggered=quitApp)  # 直接退出可以用qApp.quit
     tpMenu = QMenu()
     tpMenu.addAction(a1)
     tpMenu.addAction(a2)
     tp.setContextMenu(tpMenu)
     # 不调用show不会显示系统托盘
     tp.show()
-    # 信息提示
-    # 参数1：标题
-    # 参数2：内容
-    # 参数3：图标（0没有图标 1信息图标 2警告图标 3错误图标），0还是有一个小图标
-    # tp.showMessage('IPupLoader', 'tpContent', icon=0)
-    #
-    #
-    # def message():
-    #     print("弹出的信息被点击了")
-    #
-    #
-    # tp.messageClicked.connect(message)
-
 
     def act(reason):
         # 鼠标点击icon传递的信号会带有一个整形的值，1是表示单击右键，2是双击，3是单击左键，4是用鼠标中键点击
         if reason == 2 or reason == 3:
             w.show()
-        # print("系统托盘的图标被点击了")
 
 
     tp.activated.connect(act)
