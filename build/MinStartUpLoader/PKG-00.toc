@@ -1,4 +1,5 @@
-('D:\\codes\\python prj\\ipUploader\\myIpv6\\build\\example_main\\PKG-00.pkg',
+('D:\\codes\\python '
+ 'prj\\ipUploader\\myIpv6\\build\\MinStartUpLoader\\PKG-00.pkg',
  {'BINARY': 1,
   'DATA': 1,
   'EXECUTABLE': 1,
@@ -7,7 +8,8 @@
   'PYSOURCE': 1,
   'PYZ': 0},
  [('PYZ-00.pyz',
-   'D:\\codes\\python prj\\ipUploader\\myIpv6\\build\\example_main\\PYZ-00.pyz',
+   'D:\\codes\\python '
+   'prj\\ipUploader\\myIpv6\\build\\MinStartUpLoader\\PYZ-00.pyz',
    'PYZ'),
   ('struct', 'd:\\programdata\\anaconda3\\lib\\struct.pyo', 'PYMODULE'),
   ('pyimod01_os_path',
@@ -25,12 +27,12 @@
   ('pyi_rth_pyqt5',
    'd:\\programdata\\anaconda3\\lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pyqt5.py',
    'PYSOURCE'),
-  ('example_main',
-   'D:\\codes\\python prj\\ipUploader\\myIpv6\\src_code\\example_main.py',
+  ('MinStartUpLoader',
+   'D:\\codes\\python prj\\ipUploader\\myIpv6\\src_code\\MinStartUpLoader.py',
    'PYSOURCE'),
-  ('example_main.exe.manifest',
+  ('MinStartUpLoader.exe.manifest',
    'D:\\codes\\python '
-   'prj\\ipUploader\\myIpv6\\build\\example_main\\example_main.exe.manifest',
+   'prj\\ipUploader\\myIpv6\\build\\MinStartUpLoader\\MinStartUpLoader.exe.manifest',
    'BINARY')],
  True,
  False,

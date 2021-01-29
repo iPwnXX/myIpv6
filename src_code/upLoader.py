@@ -8,8 +8,8 @@ import time
 
 
 class upLoader:
-    def __init__(self, cycle_time=60, verbose=False, gui_enable=False):
-        self.git_dir = '../../'  # 文件位置。
+    def __init__(self, git_dir='../../',  cycle_time=60, verbose=False, gui_enable=False):
+        self.git_dir = git_dir  # 文件位置。
         self.MyIpv6 = ''
         self.keywords = ['IPv6', '2001']
         self.cycleTime = cycle_time  # update period.(in second)

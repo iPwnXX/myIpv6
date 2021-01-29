@@ -1,3 +1,4 @@
+# MinStartUpLoader: 关闭后程序隐藏到托盘里。
 # recompile to exe: pyinstaller -w -i pic/code.ico ./src_code/startUpLoader.py
 # -w: no console shown.  -F: compress to single exe file. May fail.
 
