@@ -6,6 +6,8 @@ from git import Repo
 import threading
 import time
 
+queryCommand = "ipconfig"
+
 
 class upLoader:
     def __init__(self, git_dir='../../',  cycle_time=60, verbose=False, gui_enable=False):
@@ -37,7 +39,7 @@ class upLoader:
 
             import subprocess
 
-            child = subprocess.Popen("ipconfig", shell=True, stdout=subprocess.PIPE)
+            child = subprocess.Popen(queryCommand, shell=True, stdout=subprocess.PIPE)
             out = child.communicate()  # 保存ipconfig中的所有信息
 
             text = out[0].decode('gbk')
@@ -56,7 +58,6 @@ class upLoader:
         except UnicodeDecodeError:
             if self.verbose:
                 print('error read instruction:', text)
-
 
     def write_and_upload(self):
         with open(self.git_dir + 'ipv6.txt', 'w') as f:
