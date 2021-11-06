@@ -11,9 +11,9 @@ queryCommand = "ipconfig"
 
 class upLoader:
     def __init__(self, git_dir='../../',  cycle_time=60, verbose=False, gui_enable=False):
-        self.git_dir = git_dir  # 文件位置。
+        self.git_dir = git_dir  # file location.
         self.MyIpv6 = ''
-        self.keywords = ['IPv6', '2001']
+        self.keywords = ['IPv4', '10.20'] #['IPv6', '2001']
         self.cycleTime = cycle_time  # update period.(in second)
         self.verbose = verbose  # print debug information
         self.lastIpv6 = ''
@@ -46,7 +46,7 @@ class upLoader:
             lines = text.split('\n')
             for line in lines:
                 if self.keywords[0] in line and self.keywords[1] in line:
-                    self.MyIpv6 = line[line.find('2001'):].split()[0]
+                    self.MyIpv6 = line[line.find(self.keywords[1]):].split()[0]
                     break
             if self.verbose:
                 print('current IPV6:\n', self.MyIpv6)
