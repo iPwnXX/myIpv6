@@ -123,6 +123,6 @@ class upLoader:
 
 
 if __name__ == "__main__":
-    UpLoader = upLoader(cycle_time=5, verbose=True)
+    UpLoader = upLoader(cycle_time=20, verbose=True)
 
 

@@ -1,4 +1,4 @@
-('D:\\codes\\python '
+('E:\\codes\\python '
  'prj\\ipUploader\\myIpv6\\build\\MinStartUpLoader\\MinStartUpLoader.exe',
  False,
  False,
@@ -11,7 +11,7 @@
  True,
  'MinStartUpLoader.pkg',
  [('PYZ-00.pyz',
-   'D:\\codes\\python '
+   'E:\\codes\\python '
    'prj\\ipUploader\\myIpv6\\build\\MinStartUpLoader\\PYZ-00.pyz',
    'PYZ'),
   ('struct', 'd:\\programdata\\anaconda3\\lib\\struct.pyo', 'PYMODULE'),
@@ -31,16 +31,16 @@
    'd:\\programdata\\anaconda3\\lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pyqt5.py',
    'PYSOURCE'),
   ('MinStartUpLoader',
-   'D:\\codes\\python prj\\ipUploader\\myIpv6\\src_code\\MinStartUpLoader.py',
+   'E:\\codes\\python prj\\ipUploader\\myIpv6\\src\\MinStartUpLoader.py',
    'PYSOURCE'),
   ('MinStartUpLoader.exe.manifest',
-   'D:\\codes\\python '
+   'E:\\codes\\python '
    'prj\\ipUploader\\myIpv6\\build\\MinStartUpLoader\\MinStartUpLoader.exe.manifest',
    'BINARY')],
  [],
  False,
  False,
- 1611908139,
+ 1636252009,
  [('runw.exe',
    'd:\\programdata\\anaconda3\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\runw.exe',
    'EXECUTABLE')])

@@ -14,7 +14,7 @@ Close window and hide in system tray:
 4. ipv6 record: `./ipv6.txt`
 
 ## Platform:
-To use on other system platform, re-compress the source code into a runnable program using `pyinstaller -w -i pic/code.ico ./src_code/startUpLoader.py`.    
+To use on other system platform, re-compress the source code into a runnable program using `pyinstaller -w -i pic/code.ico ./src/startUpLoader.py`.    
 Download required packages `pip install -r requirements.txt`.
 Modify ip qurey command `queryCommand` in upLoader.py accordingly.   
 

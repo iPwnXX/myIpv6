@@ -3,8 +3,8 @@
 block_cipher = None
 
 
-a = Analysis(['src_code\\MinStartUpLoader.py'],
-             pathex=['D:\\codes\\python prj\\ipUploader\\myIpv6'],
+a = Analysis(['src\\MinStartUpLoader.py'],
+             pathex=['E:\\codes\\python prj\\ipUploader\\myIpv6'],
              binaries=[],
              datas=[],
              hiddenimports=[],
